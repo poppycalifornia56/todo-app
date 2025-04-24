@@ -4,6 +4,8 @@ import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import ItemDetail from "./pages/ItemDetail";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/item/:id" element={<ItemDetail />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </div>

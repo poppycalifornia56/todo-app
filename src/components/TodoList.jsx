@@ -1,6 +1,7 @@
 import { useState } from "react";
 import tasksData from "../data/tasks.json";
 import ListItem from "./ListItem";
+import { Link } from "react-router-dom";
 
 function TodoList() {
   const [tasks, setTasks] = useState(tasksData);
@@ -15,12 +16,14 @@ function TodoList() {
       <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>🧾 Task List</h2>
       <ul style={{ listStyle: "none", padding: 0 }}>
         {tasks.map((item, index) => (
-          <ListItem
-            key={index}
-            item={item}
-            index={index}
-            onDelete={handleDelete}
-          />
+          <div key={index} style={{ marginBottom: "0.5rem" }}>
+            <Link
+              to={`/item/${item.id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <ListItem item={item} index={index} onDelete={handleDelete} />
+            </Link>
+          </div>
         ))}
       </ul>
     </div>
