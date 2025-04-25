@@ -1,33 +1,72 @@
-function ListItem({ item, onDelete, index }) {
-    return (
-      <li style={{ margin: '0.5rem 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <span style={{ marginRight: '0.5rem' }}>
-            {item.completed ? '✔️' : '❌'}
-          </span>
-          <span style={{ 
-            marginLeft: '0.5rem', 
-            textDecoration: item.completed ? 'line-through' : 'none' 
-          }}>
-            {item.task}
-          </span>
+function ListItem({ item, index, onDelete, onEdit, onToggleComplete }) {
+  return (
+    <div
+      style={{
+        padding: "1rem",
+        backgroundColor: "#1a1a1a",
+        borderRadius: "8px",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <input
+          type="checkbox"
+          checked={item.completed}
+          onChange={onToggleComplete}
+          style={{ cursor: "pointer" }}
+        />
+        <div>
+          <h3
+            style={{
+              margin: 0,
+              textDecoration: item.completed ? "line-through" : "none",
+            }}
+          >
+            {item.title}
+          </h3>
+          <p style={{ margin: 0, fontSize: "0.875rem", opacity: 0.8 }}>
+            {item.description}
+          </p>
         </div>
-        <button 
-          onClick={() => onDelete(index)}
+      </div>
+      <div style={{ display: "flex", gap: "0.5rem" }}>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            onEdit();
+          }}
           style={{
-            marginLeft: '1rem',
-            background: '#ff4444',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            padding: '0.25rem 0.5rem',
-            cursor: 'pointer'
+            backgroundColor: "#646cff",
+            color: "white",
+            padding: "0.25rem 0.5rem",
+            borderRadius: "4px",
+            border: "none",
+            cursor: "pointer",
+          }}
+        >
+          Edit
+        </button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            onDelete(index);
+          }}
+          style={{
+            backgroundColor: "#ff5555",
+            color: "white",
+            padding: "0.25rem 0.5rem",
+            borderRadius: "4px",
+            border: "none",
+            cursor: "pointer",
           }}
         >
           Delete
         </button>
-      </li>
-    );
-  }
-  
-  export default ListItem;
+      </div>
+    </div>
+  );
+}
+
+export default ListItem;
