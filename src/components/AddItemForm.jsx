@@ -24,14 +24,23 @@ function AddItemForm({ onAddItem }) {
     <form
       onSubmit={handleSubmit}
       style={{
-        marginBottom: "1rem",
-        padding: "1rem",
-        backgroundColor: "#1a1a1a",
-        borderRadius: "8px",
+        marginBottom: "1.5rem",
+        padding: "1.5rem",
+        backgroundColor: "#ffffff",
+        borderRadius: "10px",
+        boxShadow: "0 2px 8px rgba(124, 144, 219, 0.1)",
+        border: "1px solid #e0e6ed",
       }}
     >
       <div style={{ marginBottom: "0.5rem" }}>
-        <label style={{ display: "block", marginBottom: "0.25rem" }}>
+        <label
+          style={{
+            display: "block",
+            marginBottom: "0.5rem",
+            color: "#3b4a5f",
+            fontWeight: "500",
+          }}
+        >
           Title
         </label>
         <input
@@ -40,17 +49,25 @@ function AddItemForm({ onAddItem }) {
           onChange={(e) => setTitle(e.target.value)}
           style={{
             width: "100%",
-            padding: "0.5rem",
-            borderRadius: "4px",
-            border: "1px solid #646cff",
-            backgroundColor: "#242424",
-            color: "white",
+            padding: "0.75rem",
+            borderRadius: "8px",
+            border: "1px solid #e0e6ed",
+            backgroundColor: "#f8fafc",
+            color: "#3b4a5f",
+            fontSize: "1rem",
           }}
           required
         />
       </div>
-      <div style={{ marginBottom: "0.5rem" }}>
-        <label style={{ display: "block", marginBottom: "0.25rem" }}>
+      <div style={{ marginBottom: "1.5rem" }}>
+        <label
+          style={{
+            display: "block",
+            marginBottom: "0.5rem",
+            color: "#3b4a5f",
+            fontWeight: "500",
+          }}
+        >
           Description
         </label>
         <textarea
@@ -58,24 +75,28 @@ function AddItemForm({ onAddItem }) {
           onChange={(e) => setDescription(e.target.value)}
           style={{
             width: "100%",
-            padding: "0.5rem",
-            borderRadius: "4px",
-            border: "1px solid #646cff",
-            backgroundColor: "#242424",
-            color: "white",
-            minHeight: "80px",
+            padding: "0.75rem",
+            borderRadius: "8px",
+            border: "1px solid #e0e6ed",
+            backgroundColor: "#f8fafc",
+            color: "#3b4a5f",
+            minHeight: "100px",
+            fontSize: "1rem",
           }}
         />
       </div>
       <button
         type="submit"
         style={{
-          backgroundColor: "#646cff",
+          backgroundColor: "#7c90db",
           color: "white",
-          padding: "0.5rem 1rem",
-          borderRadius: "4px",
+          padding: "0.75rem 1.5rem",
+          borderRadius: "8px",
           border: "none",
           cursor: "pointer",
+          fontWeight: "500",
+          fontSize: "1rem",
+          transition: "background-color 0.2s",
         }}
       >
         Add Task

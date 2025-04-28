@@ -34,13 +34,40 @@ function TodoList() {
   };
 
   return (
-    <div style={{ maxWidth: "600px", margin: "0 auto", padding: "1rem" }}>
-      <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>🧾 Task List</h2>
+    <div
+      style={{
+        maxWidth: "800px",
+        margin: "0 auto",
+        padding: "1rem",
+        backgroundColor: "#f8fafc",
+        borderRadius: "12px",
+      }}
+    >
+      <h2
+        style={{
+          fontSize: "1.8rem",
+          marginBottom: "1.5rem",
+          color: "#3b4a5f",
+          fontWeight: "600",
+        }}
+      >
+        📝 Task List
+      </h2>
       <AddItemForm onAddItem={handleAddItem} />
 
-      <ul style={{ listStyle: "none", padding: 0 }}>
+      <ul style={{ listStyle: "none", padding: 0, marginTop: "2rem" }}>
         {tasks.map((item, index) => (
-          <div key={index} style={{ marginBottom: "0.5rem" }}>
+          <div
+            key={index}
+            style={{
+              marginBottom: "1rem",
+              backgroundColor: "#ffffff",
+              borderRadius: "8px",
+              padding: "1rem",
+              boxShadow: "0 2px 4px rgba(124, 144, 219, 0.1)",
+              borderLeft: "4px solid #7c90db",
+            }}
+          >
             {editingItem && editingItem.id === item.id ? (
               <EditItemForm
                 item={editingItem}
@@ -50,7 +77,11 @@ function TodoList() {
             ) : (
               <Link
                 to={`/item/${item.id}`}
-                style={{ textDecoration: "none", color: "inherit" }}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  display: "block",
+                }}
               >
                 <ListItem
                   item={item}

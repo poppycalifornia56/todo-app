@@ -11,7 +11,7 @@ function Navbar() {
         alignItems: "center",
       }}
     >
-      <h1 style={{ margin: 0 }}>📝 My To-Do App</h1>
+      <h1 style={{ margin: 0 }}>My To-Do App</h1>
       <div style={{ display: "flex", gap: "1rem" }}>
         <Link
           to="/"
