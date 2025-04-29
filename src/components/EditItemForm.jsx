@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from "react";
 
 function EditItemForm({ item, onUpdateItem, onCancel }) {
-  const [title, setTitle] = useState(item.title);
-  const [description, setDescription] = useState(item.description);
+  const [task, setTask] = useState(item.task);
+  const index = item.index;
 
   useEffect(() => {
-    setTitle(item.title);
-    setDescription(item.description);
+    setTask(item.task);
   }, [item]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title.trim()) return;
+    if (!task.trim()) return;
 
-    const updatedItem = {
-      ...item,
-      title,
-      description,
+    const updatedTask = {
+      task,
+      completed: item.completed,
     };
 
-    onUpdateItem(updatedItem);
+    onUpdateItem({ task: updatedTask, index });
   };
 
   return (
@@ -43,12 +41,12 @@ function EditItemForm({ item, onUpdateItem, onCancel }) {
             fontWeight: "500",
           }}
         >
-          Title
+          Task
         </label>
         <input
           type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
           style={{
             width: "100%",
             padding: "0.75rem",
@@ -59,32 +57,6 @@ function EditItemForm({ item, onUpdateItem, onCancel }) {
             fontSize: "1rem",
           }}
           required
-        />
-      </div>
-      <div style={{ marginBottom: "1.5rem" }}>
-        <label
-          style={{
-            display: "block",
-            marginBottom: "0.5rem",
-            color: "#3b4a5f",
-            fontWeight: "500",
-          }}
-        >
-          Description
-        </label>
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "0.75rem",
-            borderRadius: "8px",
-            border: "1px solid #e0e6ed",
-            backgroundColor: "#f8fafc",
-            color: "#3b4a5f",
-            minHeight: "100px",
-            fontSize: "1rem",
-          }}
         />
       </div>
       <div style={{ display: "flex", gap: "0.75rem" }}>

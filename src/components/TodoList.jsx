@@ -1,13 +1,12 @@
 import { useState } from "react";
-import tasksData from "../data/tasks.json";
+import { useNavigate } from "react-router-dom";
 import ListItem from "./ListItem";
-import { Link } from "react-router-dom";
 import AddItemForm from "./AddItemForm";
 import EditItemForm from "./EditItemForm";
 
-function TodoList() {
-  const [tasks, setTasks] = useState(tasksData);
+function TodoList({ tasks, setTasks }) {
   const [editingItem, setEditingItem] = useState(null);
+  const navigate = useNavigate();
 
   const handleDelete = (index) => {
     const newTasks = tasks.filter((_, i) => i !== index);
@@ -20,17 +19,23 @@ function TodoList() {
 
   const handleUpdateItem = (updatedItem) => {
     setTasks(
-      tasks.map((task) => (task.id === updatedItem.id ? updatedItem : task))
+      tasks.map((task, i) =>
+        i === updatedItem.index ? updatedItem.task : task
+      )
     );
     setEditingItem(null);
   };
 
-  const toggleComplete = (id) => {
+  const toggleComplete = (index) => {
     setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
+      tasks.map((task, i) =>
+        i === index ? { ...task, completed: !task.completed } : task
       )
     );
+  };
+
+  const viewTaskDetails = (index) => {
+    navigate(`/item/${index}`);
   };
 
   return (
@@ -66,31 +71,24 @@ function TodoList() {
               padding: "1rem",
               boxShadow: "0 2px 4px rgba(124, 144, 219, 0.1)",
               borderLeft: "4px solid #7c90db",
+              cursor: "pointer",
             }}
+            onClick={() => viewTaskDetails(index)}
           >
-            {editingItem && editingItem.id === item.id ? (
+            {editingItem && editingItem.index === index ? (
               <EditItemForm
-                item={editingItem}
+                item={{ ...editingItem.task, index }}
                 onUpdateItem={handleUpdateItem}
                 onCancel={() => setEditingItem(null)}
               />
             ) : (
-              <Link
-                to={`/item/${item.id}`}
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                  display: "block",
-                }}
-              >
-                <ListItem
-                  item={item}
-                  index={index}
-                  onDelete={handleDelete}
-                  onEdit={() => setEditingItem(item)}
-                  onToggleComplete={() => toggleComplete(item.id)}
-                />
-              </Link>
+              <ListItem
+                item={item}
+                index={index}
+                onDelete={handleDelete}
+                onEdit={() => setEditingItem({ task: item, index })}
+                onToggleComplete={() => toggleComplete(index)}
+              />
             )}
           </div>
         ))}

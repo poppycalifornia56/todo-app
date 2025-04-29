@@ -1,23 +1,19 @@
 import { useState } from "react";
 
 function AddItemForm({ onAddItem }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [task, setTask] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title.trim()) return;
+    if (!task.trim()) return;
 
     const newItem = {
-      id: Date.now(),
-      title,
-      description,
+      task,
       completed: false,
     };
 
     onAddItem(newItem);
-    setTitle("");
-    setDescription("");
+    setTask("");
   };
 
   return (
@@ -41,12 +37,12 @@ function AddItemForm({ onAddItem }) {
             fontWeight: "500",
           }}
         >
-          Title
+          Task
         </label>
         <input
           type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
           style={{
             width: "100%",
             padding: "0.75rem",
@@ -57,32 +53,6 @@ function AddItemForm({ onAddItem }) {
             fontSize: "1rem",
           }}
           required
-        />
-      </div>
-      <div style={{ marginBottom: "1.5rem" }}>
-        <label
-          style={{
-            display: "block",
-            marginBottom: "0.5rem",
-            color: "#3b4a5f",
-            fontWeight: "500",
-          }}
-        >
-          Description
-        </label>
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "0.75rem",
-            borderRadius: "8px",
-            border: "1px solid #e0e6ed",
-            backgroundColor: "#f8fafc",
-            color: "#3b4a5f",
-            minHeight: "100px",
-            fontSize: "1rem",
-          }}
         />
       </div>
       <button

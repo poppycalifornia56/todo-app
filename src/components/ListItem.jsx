@@ -1,4 +1,22 @@
 function ListItem({ item, index, onDelete, onEdit, onToggleComplete }) {
+  const handleToggleComplete = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onToggleComplete();
+  };
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onEdit();
+  };
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onDelete(index);
+  };
+
   return (
     <div
       style={{
@@ -12,10 +30,6 @@ function ListItem({ item, index, onDelete, onEdit, onToggleComplete }) {
         borderLeft: "4px solid #7c90db",
         transition: "transform 0.2s, box-shadow 0.2s",
         marginBottom: "0.75rem",
-        ":hover": {
-          transform: "translateY(-2px)",
-          boxShadow: "0 4px 8px rgba(124, 144, 219, 0.15)",
-        },
       }}
     >
       <div
@@ -24,7 +38,8 @@ function ListItem({ item, index, onDelete, onEdit, onToggleComplete }) {
         <input
           type="checkbox"
           checked={item.completed}
-          onChange={onToggleComplete}
+          onChange={handleToggleComplete}
+          onClick={(e) => e.stopPropagation()}
           style={{
             cursor: "pointer",
             width: "20px",
@@ -42,28 +57,13 @@ function ListItem({ item, index, onDelete, onEdit, onToggleComplete }) {
               opacity: item.completed ? 0.7 : 1,
             }}
           >
-            {item.title}
+            {item.task}
           </h3>
-          {item.description && (
-            <p
-              style={{
-                margin: "0.25rem 0 0",
-                fontSize: "0.95rem",
-                color: "#64748b",
-                opacity: item.completed ? 0.6 : 0.9,
-              }}
-            >
-              {item.description}
-            </p>
-          )}
         </div>
       </div>
       <div style={{ display: "flex", gap: "0.75rem" }}>
         <button
-          onClick={(e) => {
-            e.preventDefault();
-            onEdit();
-          }}
+          onClick={handleEdit}
           style={{
             backgroundColor: "#7c90db",
             color: "white",
@@ -74,18 +74,12 @@ function ListItem({ item, index, onDelete, onEdit, onToggleComplete }) {
             fontWeight: "500",
             fontSize: "0.9rem",
             transition: "background-color 0.2s",
-            ":hover": {
-              backgroundColor: "#6a7fc8",
-            },
           }}
         >
           Edit
         </button>
         <button
-          onClick={(e) => {
-            e.preventDefault();
-            onDelete(index);
-          }}
+          onClick={handleDelete}
           style={{
             backgroundColor: "#e67e8a",
             color: "white",
@@ -96,9 +90,6 @@ function ListItem({ item, index, onDelete, onEdit, onToggleComplete }) {
             fontWeight: "500",
             fontSize: "0.9rem",
             transition: "background-color 0.2s",
-            ":hover": {
-              backgroundColor: "#d46b79",
-            },
           }}
         >
           Delete
