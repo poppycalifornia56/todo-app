@@ -1,12 +1,7 @@
 import TodoList from "../components/TodoList";
 
-function Home() {
-  return (
-    <div>
-      <h2>Welcome to the To-Do App!</h2>
-      <TodoList />
-    </div>
-  );
+function Home({ tasks, setTasks }) {
+  return <TodoList tasks={tasks} setTasks={setTasks} />;
 }
 
 export default Home;
