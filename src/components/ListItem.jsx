@@ -1,6 +1,5 @@
 function ListItem({ item, index, onDelete, onEdit, onToggleComplete }) {
-  const handleToggleComplete = (e) => {
-    e.preventDefault();
+  const handleCheckboxClick = (e) => {
     e.stopPropagation();
     onToggleComplete();
   };
@@ -38,8 +37,7 @@ function ListItem({ item, index, onDelete, onEdit, onToggleComplete }) {
         <input
           type="checkbox"
           checked={item.completed}
-          onChange={handleToggleComplete}
-          onClick={(e) => e.stopPropagation()}
+          onClick={handleCheckboxClick}
           style={{
             cursor: "pointer",
             width: "20px",
