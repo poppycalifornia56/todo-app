@@ -6,8 +6,8 @@ function Sidebar() {
       style={{
         backgroundColor: "#f0f0f0",
         padding: "1rem",
-        width: "200px",
-        height: "100vh",
+        width: "100px",
+        height: "10vh",
       }}
     >
       <ul

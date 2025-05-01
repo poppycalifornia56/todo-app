@@ -38,6 +38,10 @@ function TodoList({ tasks, setTasks }) {
     navigate(`/item/${index}`);
   };
 
+  const handleEdit = (index) => {
+    setEditingItem({ task: tasks[index], index });
+  };
+
   return (
     <div
       style={{
@@ -62,19 +66,7 @@ function TodoList({ tasks, setTasks }) {
 
       <ul style={{ listStyle: "none", padding: 0, marginTop: "2rem" }}>
         {tasks.map((item, index) => (
-          <div
-            key={index}
-            style={{
-              marginBottom: "1rem",
-              backgroundColor: "#ffffff",
-              borderRadius: "8px",
-              padding: "1rem",
-              boxShadow: "0 2px 4px rgba(124, 144, 219, 0.1)",
-              borderLeft: "4px solid #7c90db",
-              cursor: "pointer",
-            }}
-            onClick={() => viewTaskDetails(index)}
-          >
+          <div key={index} style={{ marginBottom: "1rem" }}>
             {editingItem && editingItem.index === index ? (
               <EditItemForm
                 item={{ ...editingItem.task, index }}
@@ -86,8 +78,9 @@ function TodoList({ tasks, setTasks }) {
                 item={item}
                 index={index}
                 onDelete={handleDelete}
-                onEdit={() => setEditingItem({ task: item, index })}
-                onToggleComplete={() => toggleComplete(index)}
+                onEdit={handleEdit}
+                onToggleComplete={toggleComplete}
+                onViewDetails={viewTaskDetails}
               />
             )}
           </div>
